@@ -1,18 +1,18 @@
 import java.util.Hashtable;
 
+/**
+ * RomanToNumeral
+ *
+ * @author Regis Humana
+ * @version 0.0.1
+ */
 public class RomanToNumeral {
+
     private Hashtable<String, Integer> romanValue = new Hashtable<String, Integer>();
 
-    public static void main(String [] args) {
-        RomanToNumeral romanToNumeral = new RomanToNumeral();
-        System.out.println(romanToNumeral.convertRomanToNumeral("CMXCIX"));
-        System.out.println(romanToNumeral.convertRomanToNumeral("XLIII"));
-        System.out.println(romanToNumeral.convertRomanToNumeral("MMMMMX"));
-        System.out.println(romanToNumeral.convertRomanToNumeral("CCD"));
-        System.out.println(romanToNumeral.convertRomanToNumeral("CD"));
-        System.out.println(romanToNumeral.convertRomanToNumeral("XLIIII"));
-    }
-
+    /**
+     * Set all of Roman values into a Dictionary with their respective natural number values.
+     */
     private void setRomanValues() {
         romanValue.put("I", 1);
         romanValue.put("V", 5);
@@ -24,9 +24,10 @@ public class RomanToNumeral {
     }
 
     /**
-     *
+     * Convert a Roman number into Natural name.
      */
     public int convertRomanToNumeral(String roman) {
+        roman = roman.toUpperCase();
         setRomanValues();
         int number = 0;
         int future;
@@ -73,10 +74,11 @@ public class RomanToNumeral {
                     error += 1;
                     if (present == future && present != 1000) {
                         repetition += 1;
-                        if (repetition == 3) {
+                        if ((repetition == 3) || (present == 5 ||present == 50 || present == 500)) {
                             number = 0;
                             break;
                         }
+
                     } else {
                         repetition = 0;
                     }
